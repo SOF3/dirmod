@@ -17,3 +17,6 @@ to automatically declare `mod` statements for all the files in the directory.
 ## Supported Rust versions
 Since detecting the source file requires the [`proc_macro_span`](https://github.com/rust-lang/rust/issues/54725) feature,
 Rust Nightly is required to compile this crate.
+
+## Examples
+See the [`testcrate`](testcrate) directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.
