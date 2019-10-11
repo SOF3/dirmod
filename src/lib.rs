@@ -34,7 +34,6 @@
 //! Rust Nightly is required to compile this crate.
 
 #![feature(proc_macro_span)]
-// doc_comment::doc_comment!(include_str!("../README.md"));
 
 extern crate proc_macro;
 
