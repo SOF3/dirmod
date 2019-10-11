@@ -1,5 +1,9 @@
 language: rust
-rust: [nightly]
+rust: [nightly-2019-10-04, nightly]
+matrix:
+  allow_failures:
+    rust: nightly
+  fast_finish: true
 cache: cargo
 env:
   matrix:
