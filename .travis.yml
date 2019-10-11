@@ -1,0 +1,19 @@
+language: rust
+rust: [nightly]
+cache: cargo
+env:
+  matrix:
+    - RELEASE_FLAG=""
+    - RELEASE_FLAG="--release"
+
+install:
+  - "export RUSTFLAGS=$(cargo --version | grep nightly >/dev/null && echo \"-Z external-macro-backtrace\")"
+  - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1)"
+
+script:
+  - cargo fmt --all -- --check
+  - cargo check --all --verbose $RELEASE_FLAG
+  - cargo build --all --verbose $RELEASE_FLAG
+  - cargo test --all --verbose $RELEASE_FLAG
+  - cargo doc --all --verbose $RELEASE_FLAG
+
