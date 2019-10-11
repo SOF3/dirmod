@@ -7,6 +7,9 @@ license = "Apache-2.0"
 repository = "https://github.com/SOF3/dirmod.git"
 homepage = "https://github.com/SOF3/dirmod"
 description = "Automatic mod.rs definition"
+readme = "README.md"
+categories = ["development-tools"]
+keywords = ["module"]
 
 [lib]
 proc-macro = true
@@ -16,6 +19,3 @@ proc-macro2 = "1.0"
 quote = "1.0"
 smallvec = "0.6.10"
 syn = {version = "1.0", features = ["extra-traits"]}
-
-[badges]
-travis-ci = {repository = "SOF3/dirmod"}
