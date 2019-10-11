@@ -66,6 +66,30 @@ pub mod all {
     }
 }
 
+pub mod cfg {
+    use super::*;
+
+    #[derive(Clone, Debug)]
+    pub struct Args(pub Punctuated<Arg, token::Semi>);
+
+    impl Parse for Args {
+        fn parse(input: ParseStream) -> Result<Self> {
+            Ok(Args(input.parse_terminated(Arg::parse)?))
+        }
+    }
+
+    #[derive(Clone, Debug)]
+    pub enum Arg {
+        Cfg(ArgCfg),
+    }
+
+    impl Parse for Arg {
+        fn parse(input: ParseStream) -> Result<Self> {
+            Ok(Arg::Cfg(input.parse()?))
+        }
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct Modifier {
     pub vis: PrivVis,
@@ -150,6 +174,37 @@ pub struct ArgExcept {
 impl Spanned for ArgExcept {
     fn span(&self) -> Span {
         self.except.span()
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct ArgCfg {
+    pub modifier: Modifier,
+    pub error: Option<(token::OrOr, Option<syn::LitStr>)>,
+}
+
+impl Parse for ArgCfg {
+    fn parse(input: ParseStream) -> Result<Self> {
+        let modifier = input.parse()?;
+        let error = if input.peek(token::OrOr) {
+            let or_or = input.parse()?;
+            let msg = if input.is_empty() {
+                None
+            } else {
+                input.parse()?
+            };
+            Some((or_or, msg))
+        } else {
+            None
+        };
+
+        Ok(Self { modifier, error })
+    }
+}
+
+impl Spanned for ArgCfg {
+    fn span(&self) -> Span {
+        self.modifier.span()
     }
 }
 

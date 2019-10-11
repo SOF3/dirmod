@@ -1,9 +1,5 @@
 language: rust
-rust: [nightly-2019-10-04, nightly]
-matrix:
-  allow_failures:
-    rust: nightly
-  fast_finish: true
+rust: [nightly-2019-10-04]
 cache: cargo
 env:
   matrix:
@@ -12,7 +8,7 @@ env:
 
 install:
   - "export RUSTFLAGS=$(cargo --version | grep nightly >/dev/null && echo \"-Z external-macro-backtrace\")"
-  - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1) || true"
+  - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1)"
 
 script:
   - cargo fmt --all -- --check

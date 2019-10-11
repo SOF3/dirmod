@@ -13,8 +13,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-dirmod::all!();
-
-fn main() {
-    dbg!(foo::FOO, bar::BAR, qux::QUX);
-}
+dirmod::family!(pub use ||);

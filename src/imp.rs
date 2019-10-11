@@ -31,6 +31,7 @@ macro_rules! parse_args {
     ) => {{
         let args = syn::parse2::<parse::$mod::Args>($ts)?;
         let single = ($({
+            #[allow(irrefutable_let_patterns)]
             let rep = args.0.iter().filter_map(|arg| {
                 if let parse::$mod::Arg::$svar(arg) = arg {
                     Some(arg.clone())
@@ -56,27 +57,30 @@ macro_rules! parse_args {
     }};
 }
 
+fn apply_modifier(
+    modifier: Option<&parse::Modifier>,
+    ident: syn::Ident,
+    meta: Option<TokenStream>,
+) -> TokenStream {
+    let meta = &meta.unwrap_or(quote!());
+    if let Some(modifier) = modifier {
+        let vis = &modifier.vis;
+        if let Some(import) = modifier.imports.as_ref() {
+            quote!(#meta mod #ident; #meta #vis #import #ident::*;)
+        } else {
+            quote!(#meta #vis mod #ident;)
+        }
+    } else {
+        quote!(mod #ident;)
+    }
+}
+
 pub fn all(ts: TokenStream) -> Result<TokenStream> {
     let ((dv,), (sv, excepts)) = parse_args! {
         ts, all;
         single: DefaultVis;
         multi: SpecialVis, Except;
     };
-
-    let mods = list_mods()?;
-
-    fn apply_modifier(modifier: Option<&parse::Modifier>, ident: syn::Ident) -> TokenStream {
-        if let Some(modifier) = modifier {
-            let vis = &modifier.vis;
-            if let Some(import) = modifier.imports.as_ref() {
-                quote!(mod #ident; #vis #import #ident::*;)
-            } else {
-                quote!(#vis mod #ident;)
-            }
-        } else {
-            quote!(mod #ident;)
-        }
-    }
 
     let mut special = HashMap::<String, (Span, Rc<parse::Modifier>)>::new();
     for sve in sv {
@@ -100,7 +104,7 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
         .map(|ident| ident.to_string())
         .collect::<HashSet<_>>();
 
-    let mods = mods
+    let mods = list_mods()?
         .iter()
         .map(|name| -> Result<TokenStream> {
             if except.contains(name) {
@@ -119,7 +123,7 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
                     .map_or(dv.as_ref().map(|dv| &dv.modifier), |(_, modifier)| {
                         Some(modifier.as_ref())
                     });
-                let stmt = apply_modifier(modifier, ni);
+                let stmt = apply_modifier(modifier, ni, None);
                 Ok(stmt)
             }
         })
@@ -127,6 +131,55 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
 
     let q = quote!(#(#mods)*);
     Ok(q)
+}
+
+pub fn os(ts: TokenStream) -> Result<TokenStream> {
+    cfg(ts, "target_os")
+}
+
+pub fn family(ts: TokenStream) -> Result<TokenStream> {
+    cfg(ts, "target_family")
+}
+
+pub fn feature(ts: TokenStream) -> Result<TokenStream> {
+    cfg(ts, "feature")
+}
+
+fn cfg(ts: TokenStream, flag_name: &str) -> Result<TokenStream> {
+    let flag = syn::Ident::new(flag_name, Span::call_site());
+
+    let ((arg,), ()) = parse_args! {
+        ts, cfg;
+        single: Cfg;
+        multi: ;
+    };
+
+    let mods = list_mods()?;
+    let mods_code = mods.iter().map(|name| {
+        apply_modifier(
+            arg.as_ref().map(|arg| &arg.modifier),
+            syn::Ident::new(name, Span::call_site()),
+            Some(quote! ( #[cfg(#flag = #name)] )),
+        )
+    });
+    let el = if let Some(Some((_, error))) = arg.as_ref().map(|arg| &arg.error) {
+        let error = error.as_ref().map_or(
+            format!("{} must be one of \"{}\"", flag, mods.join("\", \"")),
+            |error| error.value(),
+        );
+        quote! {
+            #[cfg(not(any(#(#flag = #mods),*)))]
+            compile_error!(#error);
+        }
+    } else {
+        quote!()
+    };
+
+    let ret = quote! {
+        #(#mods_code)*
+        #el
+    };
+    Ok(ret)
 }
 
 fn list_mods() -> Result<Vec<String>> {
