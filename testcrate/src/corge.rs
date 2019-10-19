@@ -13,8 +13,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-dirmod::all!(except corge);
-
-fn main() {
-    dbg!(foo::FOO, bar::BAR, qux::QUX);
-}
+compile_error!("This module should not be loaded");

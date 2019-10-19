@@ -96,11 +96,24 @@ mod tests {
     use crate::parse::*;
 
     #[test]
-    fn test_arg_special_vis() {
-        use all::Arg;
+    fn test_arg_default_vis() {
+        let arg: all::Arg = syn::parse2(quote!(default pub(crate))).unwrap();
+        let dv = if let all::Arg::DefaultVis(dv) = arg {
+            dv
+        } else {
+            panic!("assertion failed: arg matches Arg::DefaultVis");
+        };
+        assert_matches!(
+            dv.modifier.vis,
+            PrivVis::Vis(syn::Visibility::Restricted(_))
+        );
+        assert!(dv.modifier.imports.is_none());
+    }
 
-        let arg: Arg = syn::parse2(quote!(pub use foo)).unwrap();
-        let sv = if let Arg::SpecialVis(sv) = arg {
+    #[test]
+    fn test_arg_special_vis() {
+        let arg: all::Arg = syn::parse2(quote!(pub use foo)).unwrap();
+        let sv = if let all::Arg::SpecialVis(sv) = arg {
             sv
         } else {
             panic!("assertion failed: arg matches Arg::SpecialVis(_)")
@@ -115,8 +128,8 @@ mod tests {
             vec!["foo".to_string()]
         );
 
-        let arg: Arg = syn::parse2(quote!(priv foo, bar)).unwrap();
-        let sv = if let Arg::SpecialVis(sv) = arg {
+        let arg: all::Arg = syn::parse2(quote!(priv foo, bar)).unwrap();
+        let sv = if let all::Arg::SpecialVis(sv) = arg {
             sv
         } else {
             panic!("assertion failed: arg matches Arg::SpecialVis(_)")
@@ -129,6 +142,24 @@ mod tests {
                 .map(|s| s.to_string())
                 .collect::<Vec<_>>(),
             vec!["foo".to_string(), "bar".to_string()]
+        );
+    }
+
+    #[test]
+    fn test_arg_except() {
+        let arg: all::Arg = syn::parse2(quote!(except corge, grault)).unwrap();
+        let ex = if let all::Arg::Except(ex) = arg {
+            ex
+        } else {
+            panic!("assertion failed: arg matches Arg::Except(_)")
+        };
+
+        assert_eq!(
+            ex.idents
+                .into_iter()
+                .map(|s| s.to_string())
+                .collect::<Vec<_>>(),
+            vec!["corge", "grault"]
         );
     }
 }
