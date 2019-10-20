@@ -16,7 +16,6 @@
 //! [![Travis-CI](https://travis-ci.com/SOF3/dirmod.svg?branch=master)](https://travis-ci.om/SOF3/dirmod)
 //! [![crates.io](https://img.shields.io/crates/v/dirmod.svg)](https://crates.io/crates/dirmod)
 //! [![crates.io](https://img.shields.io/crates/d/dirmod.svg)](https://crates.io/crates/dirmod)
-//! [![docs.rs](https://docs.rs/dirmod/badge.svg)](https://docs.rs/dirmod)
 //!
 //! Tired of writing and updating all the `mod` statements in mod.rs?
 //! Generate them with `dirmod` instead.
@@ -79,9 +78,6 @@
 //! ## Supported Rust versions
 //! Since detecting the source file requires the [`proc_macro_span`](https://github.com/rust-lang/rust/issues/54725) feature,
 //! Rust Nightly is required to compile this crate.
-//!
-//! ## How to use
-//! See [the documentation](https://docs.rs/dirmod) for detailed explanation.
 //!
 //! ## Examples
 //! See the [`testcrate`](https://github.com/SOF3/dirmod/tree/master/testcrate) directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.

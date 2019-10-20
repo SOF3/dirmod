@@ -1,12 +1,13 @@
 [package]
 name = "dirmod"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["SOFe <sofe2038@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
 repository = "https://github.com/SOF3/dirmod.git"
 homepage = "https://github.com/SOF3/dirmod"
 description = "Automatic mod.rs definition"
+documentation = "https://sof3.github.io/dirmod/"
 readme = "README.md"
 categories = ["development-tools"]
 keywords = ["module"]
