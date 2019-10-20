@@ -15,7 +15,7 @@ dirmod::all!();
 ```
 
 *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
-so macros takej simple and ambiguous names like `all`, `os`, etc.
+so macros take simple and ambiguous names like `all`, `os`, etc.
 It is recommended to call the macros in fully-qualified fashion
 like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.
 The old `#[macro_use] extern crate dirmod;` style is not recommended.)*
