@@ -23,4 +23,4 @@ script:
   - cargo doc --verbose $RELEASE_FLAG
 
 after_success:
-  - travis/deploy.sh
+  - cd .. && ./travis/deploy.sh
