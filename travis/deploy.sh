@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $TRAVIS_BRANCH == master ]] && [[ $RELEASE_FLAG == "--release" ]]; then
+if ([[ $TRAVIS_TAG ]] || [[ $TRAVIS_BRANCH == master ]]) && [[ $RELEASE_FLAG == "--release" ]]; then
   git clone https://${GH_TOKEN}@github.com/SOF3/dirmod.git --branch=gh-pages $HOME/gh-pages
 	[[ -d $HOME/gh-pages/latest ]] && rm -r $HOME/gh-pages/latest
   cp -r target/doc/ $HOME/gh-pages/latest
@@ -13,7 +13,7 @@ if [[ $TRAVIS_BRANCH == master ]] && [[ $RELEASE_FLAG == "--release" ]]; then
   git config user.name "Travis-CI: cargo doc"
   git config user.email "sofe2038@gmail.com"
   git add .
-  git commit -m "Travis-CI doc build: $TRAVIS_COMMIT_MESSAGE"
+  git commit -m "Travis-CI doc: $TRAVIS_BRANCH: $TRAVIS_COMMIT_MESSAGE"
   git push -u origin gh-pages
 else
 	echo "Only executing deployment on master with --release"
