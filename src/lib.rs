@@ -38,13 +38,20 @@
 //! so all modules can be `pub mod` or `pub(self) mod`, etc. by default at your favour:
 //!
 //! ```ignore
-//! dirmod::all!(pub);
+//! dirmod::all!(default pub);
 //! ```
 //!
 //! You can also make all modules private, and set the visibility for the *re-exported* items instead.
 //!
 //! If there are individual modules among dozens that need special visibility configuration,
 //! it is also possible to write
+//!
+//! ```ignore
+//! dirmod::all!(default pub; priv foo, bar);
+//! ```
+//!
+//! Then all modules have `pub` visibility,
+//! except `foo` and `bar` which are private.
 //!
 //! ## Conditional compilation
 //! > But I use `mod` to implement conditional compilation!
