@@ -220,6 +220,13 @@
 <span id="220">220</span>
 <span id="221">221</span>
 <span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// dirmod</span>
 <span class="comment">// Copyright (C) SOFe</span>
@@ -261,13 +268,20 @@
 <span class="doccomment">//! so all modules can be `pub mod` or `pub(self) mod`, etc. by default at your favour:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! dirmod::all!(pub);</span>
+<span class="doccomment">//! dirmod::all!(default pub);</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! You can also make all modules private, and set the visibility for the *re-exported* items instead.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! If there are individual modules among dozens that need special visibility configuration,</span>
 <span class="doccomment">//! it is also possible to write</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::all!(default pub; priv foo, bar);</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Then all modules have `pub` visibility,</span>
+<span class="doccomment">//! except `foo` and `bar` which are private.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Conditional compilation</span>
 <span class="doccomment">//! &gt; But I use `mod` to implement conditional compilation!</span>
