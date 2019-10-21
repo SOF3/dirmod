@@ -1,5 +1,5 @@
 [package]
-name = "dirmod"
+name = "dirmod-codegen"
 version = "0.1.4"
 authors = ["SOFe <sofe2038@gmail.com>"]
 edition = "2018"
@@ -7,10 +7,17 @@ license = "Apache-2.0"
 repository = "https://github.com/SOF3/dirmod.git"
 homepage = "https://github.com/SOF3/dirmod"
 description = "Automatic mod declarations"
-documentation = "https://sof3.github.io/dirmod/"
-readme = "README.md"
 categories = ["development-tools"]
 keywords = ["mod", "module"]
 
+[lib]
+proc-macro = true
+
 [dependencies]
-dirmod-codegen = {version = "0.1.4", path = "codegen"}
+proc-macro2 = "1.0"
+quote = "1.0"
+smallvec = "0.6.10"
+syn = {version = "1.0", features = ["extra-traits"]}
+
+[dev-dependencies]
+matches = "0.1.8"
