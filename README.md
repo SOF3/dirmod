@@ -3,6 +3,7 @@
 [![crates.io](https://img.shields.io/crates/v/dirmod.svg)](https://crates.io/crates/dirmod)
 [![crates.io](https://img.shields.io/crates/d/dirmod.svg)](https://crates.io/crates/dirmod)
 [![docs.rs](https://docs.rs/dirmod/badge.svg)](https://sof3.github.io/dirmod/)
+[![GitHub](https://img.shields.io/github/stars/SOF3/dirmod?style=social)](https://github.com/SOF3/dirmod)
 
 Tired of writing and updating all the `mod` statements in mod.rs?
 Generate them with `dirmod` instead.
@@ -14,7 +15,9 @@ with a simple macro call:
 dirmod::all!();
 ```
 
-*(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
+And that's all!
+
+> *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
 so macros take simple and ambiguous names like `all`, `os`, etc.
 It is recommended to call the macros in fully-qualified fashion
 like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.
@@ -47,13 +50,41 @@ No problem, `dirmod` generates `cfg` attributes for some idiomatic styles:
 - A directory where each module name is the feature name (e.g. `#[cfg(feature = "foo")] mod foo;`)
 - A directory where each module name is the OS/OS family name (e.g. `#[cfg(target_family = "unix")] mod unix;`)
 
+This can be achieved by calling `dirmod::os!()`, `dirmod::family!()` or `dirmod::feature!()`.
+
+It is likely that different OS variants of the same module expose the same API,
+so it might be practical to write:
+
+```rust
+dirmod::os!(pub use);
+```
+
+If none of the modules support the current OS, you could trigger a compile error:
+
+```rust
+dirmod::os!(pub use ||);
+```
+
+Or with a custom error message:
+
+```rust
+dirmod::os!(pub use || "custom error message");
+```
+
+Note that it does not make sense to use the `||` on `dirmod::feature!`,
+because Cargo features are incremental and should not be restricted in amount.
+
 [File an issue](https://github.com/SOF3/dirmod) if I missed any common styles!
 
-## But I am still unhappy about Xxxx corner case!
+## But I am still unhappy about xxxx corner case!
 No problem, you don't have to use `dirmod` for every module.
 `dirmod::all!()` has an `except` argument that excludes certain modules.
 Since the macro simply generates `mod` statements,
 it is perfectly fine to add more items before/after the macro call.
+
+```rust
+dirmod::all!(except corge, grault);
+```
 
 ## Documentation
 Instead of writing docs in mod.rs, write them in the module directly.
@@ -72,9 +103,6 @@ To write docs for the module, use this syntax at the top of the module (before a
 ## Supported Rust versions
 Since detecting the source file requires the [`proc_macro_span`](https://github.com/rust-lang/rust/issues/54725) feature,
 Rust Nightly is required to compile this crate.
-
-## How to use
-See [the documentation](https://sof3.github.io/dirmod/) for detailed explanation.
 
 ## Examples
 See the [`testcrate`](https://github.com/SOF3/dirmod/tree/master/testcrate) directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.

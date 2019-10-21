@@ -13,9 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! # dirmod
 //! [![Travis-CI](https://travis-ci.com/SOF3/dirmod.svg?branch=master)](https://travis-ci.om/SOF3/dirmod)
 //! [![crates.io](https://img.shields.io/crates/v/dirmod.svg)](https://crates.io/crates/dirmod)
 //! [![crates.io](https://img.shields.io/crates/d/dirmod.svg)](https://crates.io/crates/dirmod)
+//! [![docs.rs](https://docs.rs/dirmod/badge.svg)](https://sof3.github.io/dirmod/)
+//! [![GitHub](https://img.shields.io/github/stars/SOF3/dirmod?style=social)](https://github.com/SOF3/dirmod)
 //!
 //! Tired of writing and updating all the `mod` statements in mod.rs?
 //! Generate them with `dirmod` instead.
@@ -27,7 +30,9 @@
 //! dirmod::all!();
 //! ```
 //!
-//! *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
+//! And that's all!
+//!
+//! > *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
 //! so macros take simple and ambiguous names like `all`, `os`, etc.
 //! It is recommended to call the macros in fully-qualified fashion
 //! like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.
@@ -60,13 +65,41 @@
 //! - A directory where each module name is the feature name (e.g. `#[cfg(feature = "foo")] mod foo;`)
 //! - A directory where each module name is the OS/OS family name (e.g. `#[cfg(target_family = "unix")] mod unix;`)
 //!
+//! This can be achieved by calling `dirmod::os!()`, `dirmod::family!()` or `dirmod::feature!()`.
+//!
+//! It is likely that different OS variants of the same module expose the same API,
+//! so it might be practical to write:
+//!
+//! ```ignore
+//! dirmod::os!(pub use);
+//! ```
+//!
+//! If none of the modules support the current OS, you could trigger a compile error:
+//!
+//! ```ignore
+//! dirmod::os!(pub use ||);
+//! ```
+//!
+//! Or with a custom error message:
+//!
+//! ```ignore
+//! dirmod::os!(pub use || "custom error message");
+//! ```
+//!
+//! Note that it does not make sense to use the `||` on `dirmod::feature!`,
+//! because Cargo features are incremental and should not be restricted in amount.
+//!
 //! [File an issue](https://github.com/SOF3/dirmod) if I missed any common styles!
 //!
-//! ## But I am still unhappy about Xxxx corner case!
+//! ## But I am still unhappy about xxxx corner case!
 //! No problem, you don't have to use `dirmod` for every module.
 //! `dirmod::all!()` has an `except` argument that excludes certain modules.
 //! Since the macro simply generates `mod` statements,
 //! it is perfectly fine to add more items before/after the macro call.
+//!
+//! ```ignore
+//! dirmod::all!(except corge, grault);
+//! ```
 //!
 //! ## Documentation
 //! Instead of writing docs in mod.rs, write them in the module directly.
@@ -144,7 +177,7 @@ decl!(all:
       ///     pub qux, corge;
       ///     priv lorem;
       ///     except ipsum;
-      /// };
+      /// }
       /// ```
       );
 
