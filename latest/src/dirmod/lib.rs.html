@@ -227,6 +227,39 @@
 <span id="227">227</span>
 <span id="228">228</span>
 <span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// dirmod</span>
 <span class="comment">// Copyright (C) SOFe</span>
@@ -243,9 +276,12 @@
 <span class="comment">// See the License for the specific language governing permissions and</span>
 <span class="comment">// limitations under the License.</span>
 
+<span class="doccomment">//! # dirmod</span>
 <span class="doccomment">//! [![Travis-CI](https://travis-ci.com/SOF3/dirmod.svg?branch=master)](https://travis-ci.om/SOF3/dirmod)</span>
 <span class="doccomment">//! [![crates.io](https://img.shields.io/crates/v/dirmod.svg)](https://crates.io/crates/dirmod)</span>
 <span class="doccomment">//! [![crates.io](https://img.shields.io/crates/d/dirmod.svg)](https://crates.io/crates/dirmod)</span>
+<span class="doccomment">//! [![docs.rs](https://docs.rs/dirmod/badge.svg)](https://sof3.github.io/dirmod/)</span>
+<span class="doccomment">//! [![GitHub](https://img.shields.io/github/stars/SOF3/dirmod?style=social)](https://github.com/SOF3/dirmod)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Tired of writing and updating all the `mod` statements in mod.rs?</span>
 <span class="doccomment">//! Generate them with `dirmod` instead.</span>
@@ -257,7 +293,9 @@
 <span class="doccomment">//! dirmod::all!();</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),</span>
+<span class="doccomment">//! And that&#39;s all!</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! &gt; *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),</span>
 <span class="doccomment">//! so macros take simple and ambiguous names like `all`, `os`, etc.</span>
 <span class="doccomment">//! It is recommended to call the macros in fully-qualified fashion</span>
 <span class="doccomment">//! like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.</span>
@@ -290,13 +328,41 @@
 <span class="doccomment">//! - A directory where each module name is the feature name (e.g. `#[cfg(feature = &quot;foo&quot;)] mod foo;`)</span>
 <span class="doccomment">//! - A directory where each module name is the OS/OS family name (e.g. `#[cfg(target_family = &quot;unix&quot;)] mod unix;`)</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! This can be achieved by calling `dirmod::os!()`, `dirmod::family!()` or `dirmod::feature!()`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! It is likely that different OS variants of the same module expose the same API,</span>
+<span class="doccomment">//! so it might be practical to write:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::os!(pub use);</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! If none of the modules support the current OS, you could trigger a compile error:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::os!(pub use ||);</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Or with a custom error message:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::os!(pub use || &quot;custom error message&quot;);</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Note that it does not make sense to use the `||` on `dirmod::feature!`,</span>
+<span class="doccomment">//! because Cargo features are incremental and should not be restricted in amount.</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! [File an issue](https://github.com/SOF3/dirmod) if I missed any common styles!</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ## But I am still unhappy about Xxxx corner case!</span>
+<span class="doccomment">//! ## But I am still unhappy about xxxx corner case!</span>
 <span class="doccomment">//! No problem, you don&#39;t have to use `dirmod` for every module.</span>
 <span class="doccomment">//! `dirmod::all!()` has an `except` argument that excludes certain modules.</span>
 <span class="doccomment">//! Since the macro simply generates `mod` statements,</span>
 <span class="doccomment">//! it is perfectly fine to add more items before/after the macro call.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::all!(except corge, grault);</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Documentation</span>
 <span class="doccomment">//! Instead of writing docs in mod.rs, write them in the module directly.</span>
@@ -374,7 +440,7 @@
       <span class="doccomment">///     pub qux, corge;</span>
       <span class="doccomment">///     priv lorem;</span>
       <span class="doccomment">///     except ipsum;</span>
-      <span class="doccomment">/// };</span>
+      <span class="doccomment">/// }</span>
       <span class="doccomment">/// ```</span>
       );
 
