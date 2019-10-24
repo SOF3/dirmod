@@ -123,6 +123,16 @@
 <span id="123">123</span>
 <span id="124">124</span>
 <span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// dirmod</span>
 <span class="comment">// Copyright (C) SOFe</span>
@@ -158,7 +168,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! And that&#39;s all!</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! &gt; *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),</span>
+<span class="doccomment">//! &gt; *(Note: `dirmod` is designed for [Rust 2018 Edition][rust-2018],</span>
 <span class="doccomment">//! so macros take simple and ambiguous names like `all`, `os`, etc.</span>
 <span class="doccomment">//! It is recommended to call the macros in fully-qualified fashion</span>
 <span class="doccomment">//! like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.</span>
@@ -215,7 +225,7 @@
 <span class="doccomment">//! Note that it does not make sense to use the `||` on `dirmod::feature!`,</span>
 <span class="doccomment">//! because Cargo features are incremental and should not be restricted in amount.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [File an issue](https://github.com/SOF3/dirmod) if I missed any common styles!</span>
+<span class="doccomment">//! [File an issue][gh-issues] if I missed any common styles!</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## But I am still unhappy about xxxx corner case!</span>
 <span class="doccomment">//! No problem, you don&#39;t have to use `dirmod` for every module.</span>
@@ -242,11 +252,21 @@
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Supported Rust versions</span>
-<span class="doccomment">//! Since detecting the source file requires the [`proc_macro_span`](https://github.com/rust-lang/rust/issues/54725) feature,</span>
+<span class="doccomment">//! Since detecting the source file requires the [`proc_macro_span`][proc-macro-span-issue] feature,</span>
 <span class="doccomment">//! Rust Nightly is required to compile this crate.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Examples</span>
-<span class="doccomment">//! See the [`testcrate`](https://github.com/SOF3/dirmod/tree/master/testcrate) directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.</span>
+<span class="doccomment">//! See the [`testcrate`][testcrate-blob] directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Syntax reference</span>
+<span class="doccomment">//! A BNF syntax reference is available at</span>
+<span class="doccomment">//! [`syntax.bnf`](bnf-blob)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! [rust-2018]: https://doc.rust-lang.org/edition-guide/rust-2018/index.html</span>
+<span class="doccomment">//! [gh-issues]: https://github.com/SOF3/dirmod</span>
+<span class="doccomment">//! [proc-macro-span-issue]: https://github.com/rust-lang/rust/issues/54725</span>
+<span class="doccomment">//! [testcrate-blob]: https://github.com/SOF3/dirmod/tree/master/testcrate</span>
+<span class="doccomment">//! [bnf-blob]: https://github.com/SOF3/dirmod/blob/master/syntax.bnf</span>
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">dirmod_codegen</span>::<span class="kw-2">*</span>;
 </pre></div>
