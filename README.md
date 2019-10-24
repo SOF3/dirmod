@@ -1,3 +1,4 @@
+
 # dirmod
 [![Travis-CI](https://travis-ci.com/SOF3/dirmod.svg?branch=master)](https://travis-ci.om/SOF3/dirmod)
 [![crates.io](https://img.shields.io/crates/v/dirmod.svg)](https://crates.io/crates/dirmod)
@@ -17,7 +18,7 @@ dirmod::all!();
 
 And that's all!
 
-> *(Note: `dirmod` is designed for [Rust 2018 Edition](https://doc.rust-lang.org/edition-guide/rust-2018/index.html),
+> *(Note: `dirmod` is designed for [Rust 2018 Edition][rust-2018],
 so macros take simple and ambiguous names like `all`, `os`, etc.
 It is recommended to call the macros in fully-qualified fashion
 like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.
@@ -74,7 +75,7 @@ dirmod::os!(pub use || "custom error message");
 Note that it does not make sense to use the `||` on `dirmod::feature!`,
 because Cargo features are incremental and should not be restricted in amount.
 
-[File an issue](https://github.com/SOF3/dirmod) if I missed any common styles!
+[File an issue][gh-issues] if I missed any common styles!
 
 ## But I am still unhappy about xxxx corner case!
 No problem, you don't have to use `dirmod` for every module.
@@ -101,8 +102,18 @@ To write docs for the module, use this syntax at the top of the module (before a
 ```
 
 ## Supported Rust versions
-Since detecting the source file requires the [`proc_macro_span`](https://github.com/rust-lang/rust/issues/54725) feature,
+Since detecting the source file requires the [`proc_macro_span`][proc-macro-span-issue] feature,
 Rust Nightly is required to compile this crate.
 
 ## Examples
-See the [`testcrate`](https://github.com/SOF3/dirmod/tree/master/testcrate) directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.
+See the [`testcrate`][testcrate-blob] directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.
+
+## Syntax reference
+A BNF syntax reference is available at
+[`syntax.bnf`](bnf-blob)
+
+[rust-2018]: https://doc.rust-lang.org/edition-guide/rust-2018/index.html
+[gh-issues]: https://github.com/SOF3/dirmod
+[proc-macro-span-issue]: https://github.com/rust-lang/rust/issues/54725
+[testcrate-blob]: https://github.com/SOF3/dirmod/tree/master/testcrate
+[bnf-blob]: https://github.com/SOF3/dirmod/blob/master/syntax.bnf

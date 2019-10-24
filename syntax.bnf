@@ -1,0 +1,20 @@
+; UPPERCASE rules refer to those defined in the Rust Reference
+; lowercase rules are rules defined in dirmod
+dirmod_all_args := (dirmod_all_arg (';' dirmod_all_arg)* ';'?)?
+dirmod_all_arg := default_mod_arg | special_mod_arg | except_arg
+default_mod_arg := 'default' modifier
+special_mod_arg := modifier nonempty_ident_list
+except_arg := 'except' nonempty_ident_list
+
+dirmod_os_args := dirmod_cfg_args
+dirmod_family_args := dirmod_cfg_args
+dirmod_feature_args := dirmod_cfg_args
+dirmod_cfg_args := modifier error_fallback?
+
+
+modifier := vis 'use'?
+vis := VISIBILITY | 'priv' ; The VISIBILITY here does not accept empty visibility; use 'priv' to imply private visibility.
+nonempty_ident_list := IDENT (',' IDENT)* ','?
+error_fallback = error_fallback_default | error_fallback_custom
+error_fallback_default = '||'
+error_fallback_custom = '||' STRING_LITERAL
