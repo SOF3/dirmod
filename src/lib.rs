@@ -123,8 +123,7 @@
 //! See the [`testcrate`][testcrate-blob] directory, which demonstrates the use of `dirmod::all!` and `dirmod::family!`.
 //!
 //! ## Syntax reference
-//! A BNF syntax reference is available at
-//! [`syntax.bnf`](bnf-blob)
+//! A BNF syntax reference is available at [`syntax.bnf`][bnf-blob].
 //!
 //! [rust-2018]: https://doc.rust-lang.org/edition-guide/rust-2018/index.html
 //! [gh-issues]: https://github.com/SOF3/dirmod
