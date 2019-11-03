@@ -29,7 +29,7 @@ macro_rules! parse_args {
         single: $($svar:ident),*;
         multi: $($mvar:ident),*;
     ) => {{
-        let args = syn::parse2::<parse::$mod::Args>($ts)?;
+        let args = syn::parse2::<parse::$mod::Args>($ts).map_err(crate::context("argument parsing"))?;
         let single = ($({
             #[allow(irrefutable_let_patterns)]
             let rep = args.0.iter().filter_map(|arg| {
@@ -154,7 +154,7 @@ fn cfg(ts: TokenStream, flag_name: &str) -> Result<TokenStream> {
         multi: ;
     };
 
-    let mods = list_mods()?;
+    let mods = list_mods().map_err(crate::context("directory listing"))?;
     let mods_code = mods.iter().map(|name| {
         apply_modifier(
             arg.as_ref().map(|arg| &arg.modifier),

@@ -17,15 +17,22 @@
 
 extern crate proc_macro;
 
+fn context(ctx: &'static str) -> impl Fn(syn::Error) -> syn::Error {
+    move |err| {
+        syn::Error::new(err.span(), format!("Error during {}: {}", ctx, err))
+    }
+}
+
 macro_rules! decl {
     ($name:ident: $(#[$docs:meta])*) => {
         #[proc_macro]
         $(#[$docs])*
         pub fn $name(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
-            match imp::$name(ts.into()) {
+            let ret = match imp::$name(ts.into()) {
                 Ok(ts) => ts,
                 Err(err) => err.to_compile_error(),
-            }.into()
+            }.into();
+            ret
         }
     };
 }
