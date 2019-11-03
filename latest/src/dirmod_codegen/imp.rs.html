@@ -264,7 +264,7 @@
         <span class="ident">single</span>: $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">svar</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>;
         <span class="ident">multi</span>: $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">mvar</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>;
     ) <span class="op">=</span><span class="op">&gt;</span> {{
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">syn</span>::<span class="ident">parse2</span>::<span class="op">&lt;</span><span class="ident">parse</span>::<span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="macro-nonterminal">Args</span><span class="op">&gt;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ts</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">syn</span>::<span class="ident">parse2</span>::<span class="op">&lt;</span><span class="ident">parse</span>::<span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="macro-nonterminal">Args</span><span class="op">&gt;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ts</span>).<span class="ident">map_err</span>(<span class="kw">crate</span>::<span class="ident">context</span>(<span class="string">&quot;argument parsing&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">single</span> <span class="op">=</span> ($({
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">irrefutable_let_patterns</span>)]</span>
             <span class="kw">let</span> <span class="ident">rep</span> <span class="op">=</span> <span class="ident">args</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">arg</span><span class="op">|</span> {
@@ -389,7 +389,7 @@
         <span class="ident">multi</span>: ;
     };
 
-    <span class="kw">let</span> <span class="ident">mods</span> <span class="op">=</span> <span class="ident">list_mods</span>()<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">mods</span> <span class="op">=</span> <span class="ident">list_mods</span>().<span class="ident">map_err</span>(<span class="kw">crate</span>::<span class="ident">context</span>(<span class="string">&quot;directory listing&quot;</span>))<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">mods_code</span> <span class="op">=</span> <span class="ident">mods</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">name</span><span class="op">|</span> {
         <span class="ident">apply_modifier</span>(
             <span class="ident">arg</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">arg</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">arg</span>.<span class="ident">modifier</span>),
