@@ -132,6 +132,15 @@
 <span id="132">132</span>
 <span id="133">133</span>
 <span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// dirmod</span>
 <span class="comment">// Copyright (C) SOFe</span>
@@ -170,7 +179,7 @@
 <span class="doccomment">//! &gt; *(Note: `dirmod` is designed for [Rust 2018 Edition][rust-2018],</span>
 <span class="doccomment">//! so macros take simple and ambiguous names like `all`, `os`, etc.</span>
 <span class="doccomment">//! It is recommended to call the macros in fully-qualified fashion</span>
-<span class="doccomment">//! like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.</span>
+<span class="doccomment">//! like `dirmod::all!()`, `dirmod::os!()`, etc. for clarity.</span>
 <span class="doccomment">//! The old `#[macro_use] extern crate dirmod;` style is not recommended.)*</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Visibility</span>
@@ -181,7 +190,11 @@
 <span class="doccomment">//! dirmod::all!(default pub);</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! You can also make all modules private, and set the visibility for the *re-exported* items instead.</span>
+<span class="doccomment">//! You can also make all modules private, and set the visibility for the *re-exported* items instead:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::all!(default pub use);</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! If there are individual modules among dozens that need special visibility configuration,</span>
 <span class="doccomment">//! it is also possible to write</span>
@@ -192,6 +205,11 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Then all modules have `pub` visibility,</span>
 <span class="doccomment">//! except `foo` and `bar` which are private.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Similarly, if all modules are publicly re-exported and `foo` and `bar` are only exported as modules:</span>
+<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! dirmod::all!(default pub use; pub foo, bar);</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Conditional compilation</span>
 <span class="doccomment">//! &gt; But I use `mod` to implement conditional compilation!</span>
