@@ -35,7 +35,7 @@
 //! > *(Note: `dirmod` is designed for [Rust 2018 Edition][rust-2018],
 //! so macros take simple and ambiguous names like `all`, `os`, etc.
 //! It is recommended to call the macros in fully-qualified fashion
-//! like `dirmod::all!`, `dirmod::os!()`, etc. for clarity.
+//! like `dirmod::all!()`, `dirmod::os!()`, etc. for clarity.
 //! The old `#[macro_use] extern crate dirmod;` style is not recommended.)*
 //!
 //! ## Visibility
@@ -46,7 +46,11 @@
 //! dirmod::all!(default pub);
 //! ```
 //!
-//! You can also make all modules private, and set the visibility for the *re-exported* items instead.
+//! You can also make all modules private, and set the visibility for the *re-exported* items instead:
+//!
+//! ```ignore
+//! dirmod::all!(default pub use);
+//! ```
 //!
 //! If there are individual modules among dozens that need special visibility configuration,
 //! it is also possible to write
@@ -57,6 +61,11 @@
 //!
 //! Then all modules have `pub` visibility,
 //! except `foo` and `bar` which are private.
+//!
+//! Similarly, if all modules are publicly re-exported and `foo` and `bar` are only exported as modules:
+//! ```ignore
+//! dirmod::all!(default pub use; pub foo, bar);
+//! ```
 //!
 //! ## Conditional compilation
 //! > But I use `mod` to implement conditional compilation!
