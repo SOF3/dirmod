@@ -134,10 +134,28 @@
 //! ## Syntax reference
 //! A BNF syntax reference is available at [`syntax.bnf`][bnf-blob].
 //!
+//! ## Known unresolved issues
+//! ### `rustfmt` support
+//! `rustfmt` and `cargo fmt` operate on the modules directly included by the entry points
+//! by detecting direct `mod` statements in the included files.
+//! Since `rustfmt` does not expand (or even compile) macros ([known issue](rustfmt-issue)),
+//! modules included by `dirmod` would not be formatted.
+//!
+//! The most straightforward alternative for now is to run `rustfmt src/**/*.rs`
+//! with `shopt -s globstar` enabled on a Linux shell.
+//!
+//! ### Error reporting
+//! The Rust compiler may fail to locate syntax error locations correctly
+//! ([known issue](compiler-issue)).
+//! However, this issue has only been reproduced with the specific case
+//! where the syntax error is related to leading `#[]` which could be an inner attribute.
+//!
 //! [rust-2018]: https://doc.rust-lang.org/edition-guide/rust-2018/index.html
 //! [gh-issues]: https://github.com/SOF3/dirmod
 //! [proc-macro-span-issue]: https://github.com/rust-lang/rust/issues/54725
 //! [testcrate-blob]: https://github.com/SOF3/dirmod/tree/master/testcrate
 //! [bnf-blob]: https://github.com/SOF3/dirmod/blob/master/syntax.bnf
+//! [rustfmt-issue]: https://github.com/rust-lang/rustfmt/issues/3253
+//! [compiler-issue]: https://github.com/rust-lang/rust/issues/66071
 
 pub use dirmod_codegen::*;
