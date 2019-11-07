@@ -141,6 +141,24 @@
 <span id="141">141</span>
 <span id="142">142</span>
 <span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// dirmod</span>
 <span class="comment">// Copyright (C) SOFe</span>
@@ -278,11 +296,29 @@
 <span class="doccomment">//! ## Syntax reference</span>
 <span class="doccomment">//! A BNF syntax reference is available at [`syntax.bnf`][bnf-blob].</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! ## Known unresolved issues</span>
+<span class="doccomment">//! ### `rustfmt` support</span>
+<span class="doccomment">//! `rustfmt` and `cargo fmt` operate on the modules directly included by the entry points</span>
+<span class="doccomment">//! by detecting direct `mod` statements in the included files.</span>
+<span class="doccomment">//! Since `rustfmt` does not expand (or even compile) macros ([known issue](rustfmt-issue)),</span>
+<span class="doccomment">//! modules included by `dirmod` would not be formatted.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The most straightforward alternative for now is to run `rustfmt src/**/*.rs`</span>
+<span class="doccomment">//! with `shopt -s globstar` enabled on a Linux shell.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### Error reporting</span>
+<span class="doccomment">//! The Rust compiler may fail to locate syntax error locations correctly</span>
+<span class="doccomment">//! ([known issue](compiler-issue)).</span>
+<span class="doccomment">//! However, this issue has only been reproduced with the specific case</span>
+<span class="doccomment">//! where the syntax error is related to leading `#[]` which could be an inner attribute.</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! [rust-2018]: https://doc.rust-lang.org/edition-guide/rust-2018/index.html</span>
 <span class="doccomment">//! [gh-issues]: https://github.com/SOF3/dirmod</span>
 <span class="doccomment">//! [proc-macro-span-issue]: https://github.com/rust-lang/rust/issues/54725</span>
 <span class="doccomment">//! [testcrate-blob]: https://github.com/SOF3/dirmod/tree/master/testcrate</span>
 <span class="doccomment">//! [bnf-blob]: https://github.com/SOF3/dirmod/blob/master/syntax.bnf</span>
+<span class="doccomment">//! [rustfmt-issue]: https://github.com/rust-lang/rustfmt/issues/3253</span>
+<span class="doccomment">//! [compiler-issue]: https://github.com/rust-lang/rust/issues/66071</span>
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">dirmod_codegen</span>::<span class="kw-2">*</span>;
 </pre></div>

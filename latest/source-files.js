@@ -2,6 +2,7 @@ var N = null;var sourcesIndex = {};
 sourcesIndex["dirmod"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["dirmod_codegen"] = {"name":"","dirs":[{"name":"parse","files":["all.rs","arg.rs","cfg.rs","mod.rs","modifier.rs","priv_vis.rs"]}],"files":["imp.rs","lib.rs"]};
 sourcesIndex["doc_comment"] = {"name":"","files":["lib.rs"]};
+sourcesIndex["maybe_uninit"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["proc_macro2"] = {"name":"","files":["fallback.rs","lib.rs","strnom.rs","wrapper.rs"]};
 sourcesIndex["quote"] = {"name":"","files":["ext.rs","format.rs","ident_fragment.rs","lib.rs","runtime.rs","spanned.rs","to_tokens.rs"]};
 sourcesIndex["smallvec"] = {"name":"","files":["lib.rs"]};
