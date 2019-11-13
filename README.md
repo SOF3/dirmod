@@ -124,7 +124,7 @@ A BNF syntax reference is available at [`syntax.bnf`][bnf-blob].
 ### `rustfmt` support
 `rustfmt` and `cargo fmt` operate on the modules directly included by the entry points
 by detecting direct `mod` statements in the included files.
-Since `rustfmt` does not expand (or even compile) macros ([known issue](rustfmt-issue)),
+Since `rustfmt` does not expand (or even compile) macros ([known issue][rustfmt-issue]),
 modules included by `dirmod` would not be formatted.
 
 The most straightforward alternative for now is to run `rustfmt src/**/*.rs`
@@ -132,7 +132,7 @@ with `shopt -s globstar` enabled on a Linux shell.
 
 ### Error reporting
 The Rust compiler may fail to locate syntax error locations correctly
-([known issue](compiler-issue)).
+([known issue][compiler-issue]).
 However, this issue has only been reproduced with the specific case
 where the syntax error is related to leading `#[]` which could be an inner attribute.
 
