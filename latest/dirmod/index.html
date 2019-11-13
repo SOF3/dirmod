@@ -96,13 +96,13 @@ Rust Nightly is required to compile this crate.</p>
 <h2 id="known-unresolved-issues" class="section-header"><a href="#known-unresolved-issues">Known unresolved issues</a></h2><h3 id="rustfmt-support" class="section-header"><a href="#rustfmt-support"><code>rustfmt</code> support</a></h3>
 <p><code>rustfmt</code> and <code>cargo fmt</code> operate on the modules directly included by the entry points
 by detecting direct <code>mod</code> statements in the included files.
-Since <code>rustfmt</code> does not expand (or even compile) macros (<a href="rustfmt-issue">known issue</a>),
+Since <code>rustfmt</code> does not expand (or even compile) macros (<a href="https://github.com/rust-lang/rustfmt/issues/3253">known issue</a>),
 modules included by <code>dirmod</code> would not be formatted.</p>
 <p>The most straightforward alternative for now is to run <code>rustfmt src/**/*.rs</code>
 with <code>shopt -s globstar</code> enabled on a Linux shell.</p>
 <h3 id="error-reporting" class="section-header"><a href="#error-reporting">Error reporting</a></h3>
 <p>The Rust compiler may fail to locate syntax error locations correctly
-(<a href="compiler-issue">known issue</a>).
+(<a href="https://github.com/rust-lang/rust/issues/66071">known issue</a>).
 However, this issue has only been reproduced with the specific case
 where the syntax error is related to leading <code>#[]</code> which could be an inner attribute.</p>
 </div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>

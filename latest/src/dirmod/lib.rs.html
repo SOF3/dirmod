@@ -300,7 +300,7 @@
 <span class="doccomment">//! ### `rustfmt` support</span>
 <span class="doccomment">//! `rustfmt` and `cargo fmt` operate on the modules directly included by the entry points</span>
 <span class="doccomment">//! by detecting direct `mod` statements in the included files.</span>
-<span class="doccomment">//! Since `rustfmt` does not expand (or even compile) macros ([known issue](rustfmt-issue)),</span>
+<span class="doccomment">//! Since `rustfmt` does not expand (or even compile) macros ([known issue][rustfmt-issue]),</span>
 <span class="doccomment">//! modules included by `dirmod` would not be formatted.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The most straightforward alternative for now is to run `rustfmt src/**/*.rs`</span>
@@ -308,7 +308,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### Error reporting</span>
 <span class="doccomment">//! The Rust compiler may fail to locate syntax error locations correctly</span>
-<span class="doccomment">//! ([known issue](compiler-issue)).</span>
+<span class="doccomment">//! ([known issue][compiler-issue]).</span>
 <span class="doccomment">//! However, this issue has only been reproduced with the specific case</span>
 <span class="doccomment">//! where the syntax error is related to leading `#[]` which could be an inner attribute.</span>
 <span class="doccomment">//!</span>
