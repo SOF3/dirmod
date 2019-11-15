@@ -18,9 +18,7 @@
 extern crate proc_macro;
 
 fn context(ctx: &'static str) -> impl Fn(syn::Error) -> syn::Error {
-    move |err| {
-        syn::Error::new(err.span(), format!("Error during {}: {}", ctx, err))
-    }
+    move |err| syn::Error::new(err.span(), format!("Error during {}: {}", ctx, err))
 }
 
 macro_rules! decl {
