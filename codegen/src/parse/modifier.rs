@@ -27,6 +27,17 @@ pub struct Modifier {
     pub imports: Option<token::Use>,
 }
 
+impl Default for Modifier {
+    fn default() -> Self {
+        Self {
+            vis: PrivVis::Priv(token::Priv {
+                span: Span::call_site(),
+            }),
+            imports: None,
+        }
+    }
+}
+
 impl Parse for Modifier {
     fn parse(input: ParseStream) -> Result<Self> {
         Ok(Self {
