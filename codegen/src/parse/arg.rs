@@ -19,11 +19,12 @@ use syn::punctuated::Punctuated;
 use syn::spanned::Spanned;
 use syn::token;
 
-use super::{kw, Modifier};
+use super::{kw, Modifier, ModuleTypeKw};
 
 #[derive(Clone, Debug)]
 pub struct ArgDefaultVis {
     pub(super) default: kw::default,
+    pub module_type: ModuleTypeKw,
     pub modifier: Modifier,
 }
 

@@ -58,29 +58,39 @@ macro_rules! parse_args {
 }
 
 fn apply_modifier(
-    modifier: Option<&parse::Modifier>,
+    modifier: &parse::Modifier,
     ident: syn::Ident,
     meta: Option<TokenStream>,
 ) -> TokenStream {
     let meta = &meta.unwrap_or(quote!());
-    if let Some(modifier) = modifier {
-        let vis = &modifier.vis;
-        if let Some(import) = modifier.imports.as_ref() {
-            quote!(#meta mod #ident; #meta #vis #import #ident::*;)
-        } else {
-            quote!(#meta #vis mod #ident;)
-        }
+    let vis = &modifier.vis;
+    if let Some(import) = modifier.imports.as_ref() {
+        quote!(#meta mod #ident; #meta #vis #import #ident::*;)
     } else {
-        quote!(mod #ident;)
+        quote!(#meta #vis mod #ident;)
     }
 }
 
 pub fn all(ts: TokenStream) -> Result<TokenStream> {
-    let ((dv,), (sv, excepts)) = parse_args! {
+    let ((), (dv, sv, excepts)) = parse_args! {
         ts, all;
-        single: DefaultVis;
-        multi: SpecialVis, Except;
+        single: ;
+        multi: DefaultVis, SpecialVis, Except;
     };
+
+    let mut default_file = None;
+    let mut default_dir = None;
+    for dve in dv {
+        if dve.module_type.is_file() && default_file.is_none() {
+            default_file = Some(dve.modifier.clone());
+        }
+        if dve.module_type.is_dir() && default_dir.is_none() {
+            default_dir = Some(dve.modifier.clone());
+        }
+    }
+
+    let default_file = default_file.unwrap_or_else(parse::Modifier::default);
+    let default_dir = default_dir.unwrap_or_else(parse::Modifier::default);
 
     let mut special = HashMap::<String, (Span, Rc<parse::Modifier>)>::new();
     for sve in sv {
@@ -106,7 +116,7 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
 
     let mods = list_mods()?
         .iter()
-        .map(|name| -> Result<TokenStream> {
+        .map(|(name, ty)| -> Result<TokenStream> {
             if except.contains(name) {
                 if special.contains_key(name) {
                     Err(Error::new(
@@ -118,11 +128,13 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
                 }
             } else {
                 let ni = syn::Ident::new(name, Span::call_site());
-                let modifier = special
-                    .get(name)
-                    .map_or(dv.as_ref().map(|dv| &dv.modifier), |(_, modifier)| {
-                        Some(modifier.as_ref())
-                    });
+                let modifier = special.get(name).map_or_else(
+                    || match ty {
+                        ModuleType::File => &default_file,
+                        ModuleType::Dir => &default_dir,
+                    },
+                    |(_, modifier)| &modifier,
+                );
                 let stmt = apply_modifier(modifier, ni, None);
                 Ok(stmt)
             }
@@ -154,10 +166,15 @@ fn cfg(ts: TokenStream, flag_name: &str) -> Result<TokenStream> {
         multi: ;
     };
 
-    let mods = list_mods().map_err(crate::context("directory listing"))?;
+    let mods = list_mods()
+        .map_err(crate::context("directory listing"))?
+        .into_iter()
+        .map(|(name, _)| name)
+        .collect::<Vec<_>>();
     let mods_code = mods.iter().map(|name| {
         apply_modifier(
-            arg.as_ref().map(|arg| &arg.modifier),
+            &arg.as_ref()
+                .map_or_else(parse::Modifier::default, |arg| arg.modifier.clone()),
             syn::Ident::new(name, Span::call_site()),
             Some(quote! ( #[cfg(#flag = #name)] )),
         )
@@ -182,7 +199,7 @@ fn cfg(ts: TokenStream, flag_name: &str) -> Result<TokenStream> {
     Ok(ret)
 }
 
-fn list_mods() -> Result<Vec<String>> {
+fn list_mods() -> Result<Vec<(String, ModuleType)>> {
     fn me<T: std::fmt::Display>(err: T) -> Error {
         Error::new(proc_macro2::Span::call_site(), err)
     }
@@ -220,15 +237,21 @@ fn list_mods() -> Result<Vec<String>> {
                 .file_name()
                 .into_string()
                 .map_err(|_| me("Module is not UTF-8 compliant"))?;
-            ret.push(name[..(name.len() - 3)].to_string());
+            ret.push((name[..(name.len() - 3)].to_string(), ModuleType::File));
         } else if ft.is_dir() && path.join("mod.rs").is_file() {
             let name = entry
                 .file_name()
                 .into_string()
                 .map_err(|_| me("Module is not UTF-8 compliant"))?;
-            ret.push(name);
+            ret.push((name, ModuleType::Dir));
         }
     }
 
     Ok(ret)
+}
+
+#[derive(Clone, Debug)]
+enum ModuleType {
+    File,
+    Dir,
 }

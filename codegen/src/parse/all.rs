@@ -41,6 +41,7 @@ impl Parse for Arg {
         let ret = if input.peek(kw::default) {
             Arg::DefaultVis(ArgDefaultVis {
                 default: input.parse()?,
+                module_type: input.parse()?,
                 modifier: input.parse()?,
             })
         } else if input.peek(token::Priv) || input.peek(token::Pub) {

@@ -2,7 +2,7 @@
 ; lowercase rules are rules defined in dirmod
 dirmod_all_args := (dirmod_all_arg (';' dirmod_all_arg)* ';'?)?
 dirmod_all_arg := default_mod_arg | special_mod_arg | except_arg
-default_mod_arg := 'default' modifier
+default_mod_arg := 'default' file_type? modifier
 special_mod_arg := modifier nonempty_ident_list
 except_arg := 'except' nonempty_ident_list
 
@@ -12,6 +12,7 @@ dirmod_feature_args := dirmod_cfg_args
 dirmod_cfg_args := modifier error_fallback?
 
 
+file_type := 'file' | 'dir'
 modifier := vis 'use'?
 vis := VISIBILITY | 'priv' ; The VISIBILITY here does not accept empty visibility; use 'priv' to imply private visibility.
 nonempty_ident_list := IDENT (',' IDENT)* ','?

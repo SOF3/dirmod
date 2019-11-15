@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Unfortunately I can't use dirmod here :(
+// Unfortunately I can't bootstrap compile dirmod here :(
 
 pub mod all;
 pub mod cfg;
@@ -27,9 +27,14 @@ pub use priv_vis::*;
 mod arg;
 pub use arg::*;
 
+mod module_type;
+pub use module_type::*;
+
 mod kw {
     syn::custom_keyword!(default);
     syn::custom_keyword!(except);
+    syn::custom_keyword!(file);
+    syn::custom_keyword!(dir);
 }
 
 #[cfg(test)]

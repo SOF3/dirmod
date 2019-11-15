@@ -40,13 +40,18 @@ decl!(all:
       ///
       /// # Parameters
       /// The following parameter statements can be joined by semicolons.
-      /// - `default $vis [use]`: All modules have `$vis` visibility by default,
+      /// - `default [file|dir] $vis [use]`: All modules have `$vis` visibility by default,
       ///   where `$vis` can be the standard visibilities like `pub`, `pub(crate)`,
       ///   etc. The special `priv` keyword can be used to indicate private
       ///   visibility. If the `use` keyword is added behind the visibility,
       ///   modules will remain private, and `$vis use module::*;` statements
       ///   would be appended.
       ///   If this statement is not given, `priv` is assumed for default.
+      ///   The extra `file`/`dir` keyword restricts the scope of this default setting to all .rs
+      ///   files or all directories with mod.rs respectively.
+      ///   Note that it does not make sense to use all three of `default`, `default file` and
+      ///   `default dir` together. If `default` is used together with one of `default file` or
+      ///   `default dir`, it will only cover directory/file modules respectively.
       /// - `$vis [use] $name1, $name2, ...`: The specified modules have `$vis`
       ///   visibility, different from the default visibility.
       ///   The format of `$vis [use]` is identical to that in `default`.

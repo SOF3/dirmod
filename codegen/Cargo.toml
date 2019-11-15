@@ -14,10 +14,8 @@ keywords = ["mod", "module"]
 proc-macro = true
 
 [dependencies]
+matches = "0.1.8"
 proc-macro2 = "1.0"
 quote = "1.0"
 smallvec = "1.0.0"
 syn = {version = "1.0", features = ["extra-traits"]}
-
-[dev-dependencies]
-matches = "0.1.8"
