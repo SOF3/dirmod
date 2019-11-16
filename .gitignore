@@ -1,5 +1,5 @@
 # Rust files
-/target
+target
 Cargo.lock
 **/*.rs.bk
 .*.sw[a-z]
