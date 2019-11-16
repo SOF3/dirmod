@@ -1,3 +1,10 @@
+[workspace]
+members = [
+	".",
+	"codegen",
+	"testcrate",
+]
+
 [package]
 name = "dirmod"
 version = "0.1.5"

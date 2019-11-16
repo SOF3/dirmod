@@ -19,9 +19,12 @@ dirmod::all!(except corge);
 pub fn test() {
     assert_eq!(foo::FOO, 1);
     assert_eq!(bar::BAR, 3);
-    assert_eq!(qux::QUX, if cfg!(target_family = "unix") {
-        "NIX"
-    } else {
-        "WIN"
-    });
+    assert_eq!(
+        qux::QUX,
+        if cfg!(target_family = "unix") {
+            "NIX"
+        } else {
+            "WIN"
+        }
+    );
 }
