@@ -7,4 +7,5 @@ ALIASES["proc_macro2"] = {};
 ALIASES["quote"] = {};
 ALIASES["smallvec"] = {};
 ALIASES["syn"] = {};
+ALIASES["testcrate"] = {};
 ALIASES["unicode_xid"] = {};
