@@ -112,6 +112,38 @@ mod tests {
     }
 
     #[test]
+    fn test_arg_default_vis_with_file() {
+        let arg: all::Arg = syn::parse2(quote!(default file pub(crate))).unwrap();
+        let dv = if let all::Arg::DefaultVis(dv) = arg {
+            dv
+        } else {
+            panic!("assertion failed: arg matches Arg::DefaultVis");
+        };
+        assert_matches!(dv.module_type, ModuleTypeKw::File(_));
+        assert_matches!(
+            dv.modifier.vis,
+            PrivVis::Vis(syn::Visibility::Restricted(_))
+        );
+        assert!(dv.modifier.imports.is_none());
+    }
+
+    #[test]
+    fn test_arg_default_vis_with_dir() {
+        let arg: all::Arg = syn::parse2(quote!(default dir pub(crate))).unwrap();
+        let dv = if let all::Arg::DefaultVis(dv) = arg {
+            dv
+        } else {
+            panic!("assertion failed: arg matches Arg::DefaultVis");
+        };
+        assert_matches!(dv.module_type, ModuleTypeKw::Dir(_));
+        assert_matches!(
+            dv.modifier.vis,
+            PrivVis::Vis(syn::Visibility::Restricted(_))
+        );
+        assert!(dv.modifier.imports.is_none());
+    }
+
+    #[test]
     fn test_arg_special_vis() {
         let arg: all::Arg = syn::parse2(quote!(pub use foo)).unwrap();
         let sv = if let all::Arg::SpecialVis(sv) = arg {

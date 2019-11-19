@@ -13,24 +13,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#[cfg(test)]
-dirmod::all!(except corge);
-
-#[cfg(test)]
-#[test]
-pub fn test() {
-    assert_eq!(foo::FOO, 1);
-    assert_eq!(bar::BAR, 3);
-    assert_eq!(
-        qux::QUX,
-        if cfg!(target_family = "unix") {
-            "NIX"
-        } else {
-            "WIN"
-        }
-    );
-
-    assert_eq!(dir::FILE, "file");
-    assert_eq!(dir::subdir::SUBDIR, "subdir");
-    assert_eq!(dir::subdir::SUBMOD, "submod");
-}
+pub const SUBMOD: &str = "submod";
