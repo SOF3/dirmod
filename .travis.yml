@@ -9,15 +9,17 @@ env:
 install:
   - "export RUSTFLAGS=$(cargo --version | grep nightly >/dev/null && echo \"-Z external-macro-backtrace\")"
   - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1)"
-  - cargo install just
+  - command -v just || cargo install just
+  - command -v cargo-audit || cargo install cargo-audit
 
 script:
-  - cargo fmt --all -- --check
-  - just update-readme && git diff --quiet
   - cargo check --all --verbose $RELEASE_FLAG
   - cargo build --all --verbose $RELEASE_FLAG
   - cargo test --all --verbose $RELEASE_FLAG
   - cargo doc --all --verbose $RELEASE_FLAG
+  - cargo fmt --all -- --check
+  - cargo audit -D
+  - just update-readme && git diff --quiet
 
 after_success:
   - cd .. && ./travis/deploy.sh
