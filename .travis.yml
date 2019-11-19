@@ -9,7 +9,7 @@ env:
 install:
   - "export RUSTFLAGS=$(cargo --version | grep nightly >/dev/null && echo \"-Z external-macro-backtrace\")"
   - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1)"
-  - cargo install just
+  - command -v just || cargo install just
 
 script:
   - cargo fmt --all -- --check
