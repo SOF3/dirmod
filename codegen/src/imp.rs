@@ -89,8 +89,8 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
         }
     }
 
-    let default_file = default_file.unwrap_or_else(parse::Modifier::default);
-    let default_dir = default_dir.unwrap_or_else(parse::Modifier::default);
+    let default_file = default_file.unwrap_or_else(parse::Modifier::default_file);
+    let default_dir = default_dir.unwrap_or_else(parse::Modifier::default_dir);
 
     let mut special = HashMap::<String, (Span, Rc<parse::Modifier>)>::new();
     for sve in sv {
@@ -174,7 +174,7 @@ fn cfg(ts: TokenStream, flag_name: &str) -> Result<TokenStream> {
     let mods_code = mods.iter().map(|name| {
         apply_modifier(
             &arg.as_ref()
-                .map_or_else(parse::Modifier::default, |arg| arg.modifier.clone()),
+                .map_or_else(parse::Modifier::default_cfg, |arg| arg.modifier.clone()),
             syn::Ident::new(name, Span::call_site()),
             Some(quote! ( #[cfg(#flag = #name)] )),
         )

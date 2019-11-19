@@ -27,8 +27,26 @@ pub struct Modifier {
     pub imports: Option<token::Use>,
 }
 
-impl Default for Modifier {
-    fn default() -> Self {
+impl Modifier {
+    pub fn default_file() -> Self {
+        Self {
+            vis: PrivVis::Priv(token::Priv {
+                span: Span::call_site(),
+            }),
+            imports: Some(token::Use(Span::call_site())),
+        }
+    }
+
+    pub fn default_dir() -> Self {
+        Self {
+            vis: PrivVis::Priv(token::Priv {
+                span: Span::call_site(),
+            }),
+            imports: None,
+        }
+    }
+
+    pub fn default_cfg() -> Self {
         Self {
             vis: PrivVis::Priv(token::Priv {
                 span: Span::call_site(),

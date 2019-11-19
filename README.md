@@ -25,19 +25,22 @@ like `dirmod::all!()`, `dirmod::os!()`, etc. for clarity.
 The old `#[macro_use] extern crate dirmod;` style is not recommended.)*
 
 ## Visibility
-Modules can be set to a common visibility,
-so all modules can be `pub mod` or `pub(self) mod`, etc. by default at your favour:
+### Default visibility
+All modules can be set to a common visibility,
+e.g. `pub mod` or `pub(self) mod`, etc. at your favour:
 
 ```rust
 dirmod::all!(default pub);
 ```
 
+### Re-exporting
 You can also make all modules private, and set the visibility for the *re-exported* items instead:
 
 ```rust
 dirmod::all!(default pub use);
 ```
 
+### Separate file defaults and directory defaults
 It might be common to handle file modules and directory modules separately:
 
 ```rust
@@ -47,6 +50,11 @@ dirmod::all!(default file pub use; default dir pub);
 This re-exports all items from file modules, and makes all directory modules public by name.
 (This behaviour is similar to the package system in Go)
 
+### The default behaviour
+If the `default` argument is not given, `default file priv use; default dir priv` is the default
+choice.
+
+### Individual visibility
 If there are individual modules among dozens that need special visibility configuration,
 it is also possible to write:
 
