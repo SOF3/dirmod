@@ -38,8 +38,17 @@ You can also make all modules private, and set the visibility for the *re-export
 dirmod::all!(default pub use);
 ```
 
+It might be common to handle file modules and directory modules separately:
+
+```rust
+dirmod::all!(default file pub use; default dir pub);
+```
+
+This re-exports all items from file modules, and makes all directory modules public by name.
+(This behaviour is similar to the package system in Go)
+
 If there are individual modules among dozens that need special visibility configuration,
-it is also possible to write
+it is also possible to write:
 
 ```rust
 dirmod::all!(default pub; priv foo, bar);

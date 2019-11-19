@@ -38,7 +38,7 @@ impl Parse for ModuleTypeKw {
     fn parse(input: ParseStream) -> Result<Self> {
         if input.peek(kw::file) {
             Ok(Self::File(input.parse()?))
-        } else if input.peek(kw::file) {
+        } else if input.peek(kw::dir) {
             Ok(Self::Dir(input.parse()?))
         } else {
             Ok(Self::All)
