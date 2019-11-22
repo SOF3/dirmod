@@ -7,7 +7,7 @@ members = [
 
 [package]
 name = "dirmod"
-version = "0.2.0"
+version = "0.2.0-alpha.1"
 authors = ["SOFe <sofe2038@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
@@ -20,4 +20,4 @@ categories = ["development-tools"]
 keywords = ["mod", "module"]
 
 [dependencies]
-dirmod-codegen = {version = "0.2.0", path = "codegen"}
+dirmod-codegen = {version = "0.2.0-alpha.1", path = "codegen"}
