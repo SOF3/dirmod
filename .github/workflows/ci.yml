@@ -1,0 +1,74 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  readme-check:
+    name: README check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+      - run: just update-readme
+      - name: Check if anything changed
+        run: git diff --quiet
+  fmt:
+    name: rustfmt Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: default
+          default: true
+      - name: Run rustfmt
+        run: cargo fmt --all -- --check
+  lint:
+    name: Rust Lint
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+        rustup_channel:
+          - nightly
+        stability:
+          - ""
+          - "--release"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{matrix.rustup_channel}}
+          profile: default
+          default: true
+      - name: Run compiler check
+        run: cargo check --all ${{matrix.stability}}
+      - name: Run clippy check
+        run: cargo clippy --all ${{matrix.stability}}
+  test:
+    name: Cargo Test
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+        rustup_channel:
+          - nightly
+        stability:
+          - ""
+          - "--release"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{matrix.rustup_channel}}
+          profile: default
+          default: true
+      - name: Run tests
+        run: cargo test --all ${{matrix.stability}}

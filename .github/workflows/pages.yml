@@ -1,0 +1,31 @@
+name: Docs Deployment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Docs build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rustup_channel:
+          - nightly
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rustup_channel }}
+          profile: default
+          default: true
+      - name: Build docs
+        run: cargo doc --all
+      - name: Deploy
+        run: |
+          git clone https://${{ secrets.GH_TOKEN }}@github.com/SOF3/dirmod -b gh-pages _pages
+          cd _pages
+          git rm -r .
+          cp -r ../target/doc/* .
+          git add .
+          git -c "user.name=SOFe" -c "user.email=sofe2038@gmail.com" commit -m "Pages deployed for SOF3/dirmod@${{github.sha}}"
+          git push
