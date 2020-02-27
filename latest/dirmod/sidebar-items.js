@@ -1,1 +1,0 @@
-initSidebarItems({"macro":[["all","Include all possible modules in the directory"],["family","Includes modules based on the `target_family` cfg attribute."],["feature","Includes modules based on the `feature` cfg attribute."],["os","Includes modules based on the `target_os` cfg attribute."]]});

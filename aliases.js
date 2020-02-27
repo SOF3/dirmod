@@ -1,0 +1,10 @@
+var ALIASES = {};
+ALIASES["dirmod"] = {};
+ALIASES["dirmod_codegen"] = {};
+ALIASES["matches"] = {};
+ALIASES["proc_macro2"] = {};
+ALIASES["quote"] = {};
+ALIASES["smallvec"] = {};
+ALIASES["syn"] = {};
+ALIASES["testcrate"] = {};
+ALIASES["unicode_xid"] = {};
