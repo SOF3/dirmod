@@ -9,6 +9,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
+      - run: cargo install just
       - run: just update-readme
       - name: Check if anything changed
         run: git diff --quiet
