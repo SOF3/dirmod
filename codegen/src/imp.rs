@@ -40,7 +40,7 @@ macro_rules! parse_args {
                 }
             }).collect::<SmallVec<[_; 1]>>();
             if rep.len() > 1 {
-                Err(Error::new(rep[1].span(), "The statement is repeated"))?
+                return Err(Error::new(rep[1].span(), "The statement is repeated"));
             }
             rep.into_iter().next()
         },)*);
@@ -99,10 +99,10 @@ pub fn all(ts: TokenStream) -> Result<TokenStream> {
         for name_ident in sve.idents {
             let name = name_ident.to_string();
             if special.contains_key(&name) {
-                Err(Error::new(
+                return Err(Error::new(
                     name_ident.span(),
                     "The module has multiple visibilities",
-                ))?
+                ));
             }
             special.insert(name, (span, modifier.clone()));
         }

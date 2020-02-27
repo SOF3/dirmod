@@ -55,7 +55,7 @@ impl Parse for Arg {
                 idents: Punctuated::parse_terminated(input)?,
             })
         } else {
-            Err(input.error("invalid argument for all!()"))?
+            return Err(input.error("invalid argument for all!()"))
         };
         Ok(ret)
     }
