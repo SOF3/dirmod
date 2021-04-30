@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `dirmod` crate."><meta name="keywords" content="rust, rustlang, rust-lang, dirmod"><title>dirmod - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../dirmod/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate dirmod</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all dirmod's items</p></a><div class="block items"><ul><li><a href="#macros">Macros</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'dirmod', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/dirmod/lib.rs.html#16-178' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>dirmod</a></span></h1><div class='docblock'><h1 id="dirmod" class="section-header"><a href="#dirmod">dirmod</a></h1>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="dirmod"><meta name="keywords" content="rust, rustlang, rust-lang, dirmod"><title>dirmod - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../dirmod/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class="location">Crate dirmod</p><div class="block version"><p>Version 0.2.0-alpha.1</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all dirmod's items</p></a><div class="block items"><ul><li><a href="#macros">Macros</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="dirmod" data-ty="mod" data-relpath="../"></div></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">dirmod</a><button id="copy-path" onclick="copy_path(this)">⎘</button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/dirmod/lib.rs.html#16-178" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="dirmod" class="section-header"><a href="#dirmod">dirmod</a></h1>
 <p><a href="https://travis-ci.om/SOF3/dirmod"><img src="https://travis-ci.com/SOF3/dirmod.svg?branch=master" alt="Travis-CI" /></a>
 <a href="https://crates.io/crates/dirmod"><img src="https://img.shields.io/crates/v/dirmod.svg" alt="crates.io" /></a>
 <a href="https://crates.io/crates/dirmod"><img src="https://img.shields.io/crates/d/dirmod.svg" alt="crates.io" /></a>
@@ -9,9 +12,9 @@ Generate them with <code>dirmod</code> instead.</p>
 <p><code>dirmod</code> scans your directory and generates the corresponding <code>mod</code> statements automatically
 with a simple macro call:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>();</pre></div>
-<p>And that's all!</p>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>();</pre></div>
+<p>And that’s all!</p>
 <blockquote>
 <p><em>(Note: <code>dirmod</code> is designed for <a href="https://doc.rust-lang.org/edition-guide/rust-2018/index.html">Rust 2018 Edition</a>,
 so macros take simple and ambiguous names like <code>all</code>, <code>os</code>, etc.
@@ -23,18 +26,18 @@ The old <code>#[macro_use] extern crate dirmod;</code> style is not recommended.
 <p>All modules can be set to a common visibility,
 e.g. <code>pub mod</code> or <code>pub(self) mod</code>, etc. at your favour:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">default</span> <span class="kw">pub</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">default</span> <span class="kw">pub</span>);</pre></div>
 <h3 id="re-exporting" class="section-header"><a href="#re-exporting">Re-exporting</a></h3>
 <p>You can also make all modules private, and set the visibility for the <em>re-exported</em> items instead:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">default</span> <span class="kw">pub</span> <span class="kw">use</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">default</span> <span class="kw">pub</span> <span class="kw">use</span>);</pre></div>
 <h3 id="separate-file-defaults-and-directory-defaults" class="section-header"><a href="#separate-file-defaults-and-directory-defaults">Separate file defaults and directory defaults</a></h3>
 <p>It might be common to handle file modules and directory modules separately:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">default</span> <span class="ident">file</span> <span class="kw">pub</span> <span class="kw">use</span>; <span class="ident">default</span> <span class="ident">dir</span> <span class="kw">pub</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">default</span> <span class="ident">file</span> <span class="kw">pub</span> <span class="kw">use</span>; <span class="ident">default</span> <span class="ident">dir</span> <span class="kw">pub</span>);</pre></div>
 <p>This re-exports all items from file modules, and makes all directory modules public by name.
 (This behaviour is similar to the package system in Go)</p>
 <h3 id="the-default-behaviour" class="section-header"><a href="#the-default-behaviour">The default behaviour</a></h3>
@@ -44,14 +47,14 @@ choice.</p>
 <p>If there are individual modules among dozens that need special visibility configuration,
 it is also possible to write:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">default</span> <span class="kw">pub</span>; <span class="kw">priv</span> <span class="ident">foo</span>, <span class="ident">bar</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">default</span> <span class="kw">pub</span>; <span class="kw">priv</span> <span class="ident">foo</span>, <span class="ident">bar</span>);</pre></div>
 <p>Then all modules have <code>pub</code> visibility,
 except <code>foo</code> and <code>bar</code> which are private.</p>
 <p>Similarly, if all modules are publicly re-exported and <code>foo</code> and <code>bar</code> are only exported as modules:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">default</span> <span class="kw">pub</span> <span class="kw">use</span>; <span class="kw">pub</span> <span class="ident">foo</span>, <span class="ident">bar</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">default</span> <span class="kw">pub</span> <span class="kw">use</span>; <span class="kw">pub</span> <span class="ident">foo</span>, <span class="ident">bar</span>);</pre></div>
 <h2 id="conditional-compilation" class="section-header"><a href="#conditional-compilation">Conditional compilation</a></h2>
 <blockquote>
 <p>But I use <code>mod</code> to implement conditional compilation!</p>
@@ -65,27 +68,27 @@ except <code>foo</code> and <code>bar</code> which are private.</p>
 <p>It is likely that different OS variants of the same module expose the same API,
 so it might be practical to write:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">os</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="kw">use</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::os!</span>(<span class="kw">pub</span> <span class="kw">use</span>);</pre></div>
 <p>If none of the modules support the current OS, you could trigger a compile error:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">os</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="kw">use</span> <span class="op">|</span><span class="op">|</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::os!</span>(<span class="kw">pub</span> <span class="kw">use</span> <span class="op">|</span><span class="op">|</span>);</pre></div>
 <p>Or with a custom error message:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">os</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="kw">use</span> <span class="op">|</span><span class="op">|</span> <span class="string">&quot;custom error message&quot;</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::os!</span>(<span class="kw">pub</span> <span class="kw">use</span> <span class="op">|</span><span class="op">|</span> <span class="string">&quot;custom error message&quot;</span>);</pre></div>
 <p>Note that it does not make sense to use the <code>||</code> on <code>dirmod::feature!</code>,
 because Cargo features are incremental and should not be restricted in amount.</p>
 <p><a href="https://github.com/SOF3/dirmod">File an issue</a> if I missed any common styles!</p>
 <h2 id="but-i-am-still-unhappy-about-xxxx-corner-case" class="section-header"><a href="#but-i-am-still-unhappy-about-xxxx-corner-case">But I am still unhappy about xxxx corner case!</a></h2>
-<p>No problem, you don't have to use <code>dirmod</code> for every module.
+<p>No problem, you don’t have to use <code>dirmod</code> for every module.
 <code>dirmod::all!()</code> has an <code>except</code> argument that excludes certain modules.
 Since the macro simply generates <code>mod</code> statements,
 it is perfectly fine to add more items before/after the macro call.</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
-<span class="ident">dirmod</span>::<span class="macro">all</span><span class="macro">!</span>(<span class="ident">except</span> <span class="ident">corge</span>, <span class="ident">grault</span>);</pre></div>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="macro">dirmod::all!</span>(<span class="ident">except</span> <span class="ident">corge</span>, <span class="ident">grault</span>);</pre></div>
 <h2 id="documentation" class="section-header"><a href="#documentation">Documentation</a></h2>
 <p>Instead of writing docs in mod.rs, write them in the module directly.
 In addition to <code>dirmod</code> constraints, there are a few advantages:</p>
@@ -95,7 +98,7 @@ In addition to <code>dirmod</code> constraints, there are a few advantages:</p>
 </ul>
 <p>To write docs for the module, use this syntax at the top of the module (before any other items):</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
 <span class="doccomment">//! Yay, I&#39;m now describing myself!</span>
 <span class="doccomment">//! I finally have my own place!</span></pre></div>
 <h2 id="supported-rust-versions" class="section-header"><a href="#supported-rust-versions">Supported Rust versions</a></h2>
@@ -117,9 +120,10 @@ with <code>shopt -s globstar</code> enabled on a Linux shell.</p>
 (<a href="https://github.com/rust-lang/rust/issues/66071">known issue</a>).
 However, this issue has only been reproduced with the specific case
 where the syntax error is related to leading <code>#[]</code> which could be an inner attribute.</p>
-</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
-<table><tr class='module-item'><td><a class="macro" href="macro.all.html" title='dirmod::all macro'>all</a></td><td class='docblock-short'><p>Include all possible modules in the directory</p>
-</td></tr><tr class='module-item'><td><a class="macro" href="macro.family.html" title='dirmod::family macro'>family</a></td><td class='docblock-short'><p>Includes modules based on the <code>target_family</code> cfg attribute.</p>
-</td></tr><tr class='module-item'><td><a class="macro" href="macro.feature.html" title='dirmod::feature macro'>feature</a></td><td class='docblock-short'><p>Includes modules based on the <code>feature</code> cfg attribute.</p>
-</td></tr><tr class='module-item'><td><a class="macro" href="macro.os.html" title='dirmod::os macro'>os</a></td><td class='docblock-short'><p>Includes modules based on the <code>target_os</code> cfg attribute.</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "dirmod";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
+</div><h2 id="macros" class="section-header"><a href="#macros">Macros</a></h2>
+<table><tr class="module-item"><td><a class="macro" href="macro.all.html" title="dirmod::all macro">all</a></td><td class="docblock-short"><p>Include all possible modules in the directory</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.family.html" title="dirmod::family macro">family</a></td><td class="docblock-short"><p>Includes modules based on the <code>target_family</code> cfg attribute.</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.feature.html" title="dirmod::feature macro">feature</a></td><td class="docblock-short"><p>Includes modules based on the <code>feature</code> cfg attribute.</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.os.html" title="dirmod::os macro">os</a></td><td class="docblock-short"><p>Includes modules based on the <code>target_os</code> cfg attribute.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="dirmod" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+    <script src="../main.js"></script></body></html>
